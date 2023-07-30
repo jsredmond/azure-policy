@@ -7,17 +7,17 @@ variable "security_policyset_definitions" {
     "Gateway subnets should not be configured with a network security group",
     "Storage accounts should restrict network access",
     "Secure transfer to storage accounts should be enabled",
-    "Access through Internet facing endpoint should be restricted",
     "Storage accounts should allow access from trusted Microsoft services",
-    "RDP access from the Internet should be blocked",
-    "SSH access from the Internet should be blocked",
-    "Disk encryption should be applied on virtual machines",
     "Automation account variables should be encrypted",
     "Azure subscriptions should have a log profile for Activity Log",
-    "Email notification to subscription owner for high severity alerts should be enabled",
-    "A security contact email address should be provided for your subscription",
-    "Enable Azure Security Center on your subscription"
+    "Email notification to subscription owner for high severity alerts should be enabled"
   ]
+}
+
+variable "policyset_definition_category" {
+  description = "Category for the policy set definition"
+  type        = string
+  default     = "Security"
 }
 
 variable "assign_to_management_group" {
@@ -34,6 +34,30 @@ variable "assign_to_subscription" {
 
 variable "assign_to_resource_group" {
   type        = bool
-  description = "Whether to assign the policy to a subscription"
+  description = "Whether to assign the policy to a resource group"
   default     = false
+}
+
+variable "management_group_name" {
+  description = "Management group name to assign the policy, if assign_to_management_group is set to true"
+  type        = string
+  default     = ""
+}
+
+variable "resource_group_name" {
+  description = "Resource group name to assign the policy, if assign_to_resource_group is set to true"
+  type        = string
+  default     = ""
+}
+
+variable "definition_assignment_name" {
+  description = "Definition assignment name"
+  type        = string
+  default     = "My Security Azure Policy Initiative Assignment"
+}
+
+variable "initiative_name" {
+  description = "Initiative name"
+  type        = string
+  default     = "My Security Azure Policy Initiative"
 }
